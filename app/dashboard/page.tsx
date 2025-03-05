@@ -1,9 +1,11 @@
 "use client";
 
+import { useAuthStore } from "@/store/useAuthStore";
 import { useState } from "react";
 
 export default function Dashboard() {
-  const user = { username: "JohnDoe", email: "johndoe@example.com" };
+  const { authUser, logout } = useAuthStore();
+  console.log(authUser);
   const [assignments, setAssignments] = useState([
     {
       assignment_id: 1,
@@ -44,10 +46,13 @@ export default function Dashboard() {
       <div className="w-full max-w-3xl space-y-6">
         <div className="p-6 rounded-xl bg-gray-900 shadow-xl ring-1 ring-blue-500/50">
           <h1 className="text-3xl font-bold text-blue-400">
-            Welcome, {user.username}!
+            Welcome, {authUser?.username}!
           </h1>
-          <p className="text-gray-400">Email: {user.email}</p>
-          <button className="mt-4 w-full rounded-lg bg-red-500 px-5 py-2 font-bold text-white transition hover:bg-red-600">
+          <p className="text-gray-400">Email: {authUser?.email}</p>
+          <button
+            className="mt-4 w-full rounded-lg bg-red-500 px-5 py-2 font-bold text-white transition hover:bg-red-600"
+            onClick={logout}
+          >
             Logout
           </button>
         </div>
