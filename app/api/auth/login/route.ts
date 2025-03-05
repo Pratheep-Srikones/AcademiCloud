@@ -31,12 +31,14 @@ export async function POST(req: Request) {
       username: user.username,
     }) as string;
 
-    const response = NextResponse.json({
-      message: "Login successful",
-      user_id: user.user_id,
-      username: user.username,
-      status: 200,
-    });
+    const response = NextResponse.json(
+      {
+        user_id: user.user_id,
+        username: user.username,
+        email: user.email,
+      },
+      { status: 200 }
+    );
 
     response.cookies.set("token", token, {
       httpOnly: true,

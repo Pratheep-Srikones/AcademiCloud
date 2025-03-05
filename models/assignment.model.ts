@@ -90,6 +90,20 @@ export const getPendingAssignmentCountModel = async (user_id: string) => {
   return data.length;
 };
 
+export const getAssignmentsByModuleAndUserModel = async (
+  module_id: string,
+  user_id: string
+) => {
+  const { data, error } = await supabase
+    .from("assignment")
+    .select("*")
+    .eq("module_id", module_id)
+    .eq("user_id", user_id);
+  if (error) {
+    throw error;
+  }
+  return data;
+};
 export const completeAssignmentModel = async (assignment_id: string) => {
   const { data, error } = await supabase
     .from("assignment")
