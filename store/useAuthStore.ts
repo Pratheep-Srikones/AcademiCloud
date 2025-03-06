@@ -23,9 +23,10 @@ export const useAuthStore = create<AuthState>()(
           });
           set({ authUser: data });
           toastSuccess("Logged in successfully");
+          window.location.href = "/dashboard";
         } catch (error) {
           if (axios.isAxiosError(error) && error.response) {
-            toastError(error.response.data.message);
+            toastError(error.response.data.error);
           } else {
             toastError("An unexpected error occurred");
           }
@@ -35,6 +36,7 @@ export const useAuthStore = create<AuthState>()(
         set({ authUser: null });
         axios.post("/api/auth/logout");
         toastSuccess("Logged out successfully");
+        window.location.href = "/auth/login";
       },
       signup: async (username, email, password) => {
         try {

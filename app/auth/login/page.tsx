@@ -14,7 +14,10 @@ export default function Login() {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const handleLogin = async () => {
-    login(username, password);
+    login(username, password).then(() => {
+      setUsername("");
+      setPassword("");
+    });
   };
 
   return (

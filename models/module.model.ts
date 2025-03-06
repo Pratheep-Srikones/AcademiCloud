@@ -1,13 +1,13 @@
 import { supabase } from "@/lib/supabase";
 export interface Module {
-  id: string;
+  module_id: string;
   name: string;
   semester: number;
 }
 
 export const addModuleModel = async (name: string, semester: number) => {
   const { data, error } = await supabase
-    .from("modules")
+    .from("module")
     .insert([{ name, semester }]);
   if (error) {
     throw error;
@@ -16,7 +16,7 @@ export const addModuleModel = async (name: string, semester: number) => {
 };
 
 export const getModulesModel = async () => {
-  const { data, error } = await supabase.from("modules").select("*");
+  const { data, error } = await supabase.from("module").select("*");
   if (error) {
     throw error;
   }
@@ -25,7 +25,7 @@ export const getModulesModel = async () => {
 
 export const getModuleModel = async (id: string) => {
   const { data, error } = await supabase
-    .from("modules")
+    .from("module")
     .select("*")
     .eq("id", id);
   if (error) {

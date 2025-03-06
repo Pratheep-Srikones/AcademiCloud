@@ -48,9 +48,7 @@ export async function POST(req: Request) {
       module_id
     );
     return NextResponse.json({
-      message: "Assignment added successfully",
       data,
-      status: 200,
     });
   } catch (error) {
     if (error instanceof Error) {
